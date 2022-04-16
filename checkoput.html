@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   form {
+            display: flex;
+            flex-direction: column;
+            padding: 3%;
+            height: 300px;
+            justify-content: space-between;
+        }
+        input{
+            padding: 1%; 
+          
+        }
+        #pay{
+            color: white;
+            background-color: black;
+        }
+        #container{
+            
+            width: 30%;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            margin: auto;
+            margin-top: 100px;
+
+        }
+</style>
+<body>
+    <div id="container">
+        <form>
+            <input type="text" placeholder="Enter your name" id="name">
+            <input type="text" placeholder="Enter your address" id="address">
+            
+            <div>
+                <input type="text" placeholder="Enter your state" id="state">
+                <input type="number" placeholder="Enter your pincode" id="pincode">
+            </div>
+            <input type="number" placeholder="Enter your card no" id="card">
+            <div>
+                <select name="Month" id="month" >
+                    <option value="">Month</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
+                </select>
+                <select name="year" id="year">
+                    <option value="">Year</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                 </select>
+                 <input type="number" id="cvv" placeholder="CVV">
+                 
+            </div>
+            <input type="submit" value="Pay" id="pay">
+        </form>
+       
+    </div>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', paymentFn);
+
+function paymentFn(){
+    event.preventDefault()
+    var name = document.querySelector('#name').value;
+    var address = document.querySelector('#address').value;
+    var state = document.querySelector('#state').value;
+    var pincode = document.querySelector('#pincode').value;
+    var number = document.querySelector('#card').value;
+    var month = document.querySelector('#month').value;
+    var year = document.querySelector('#year').value;
+    var cvv = document.querySelector('#cvv').value;
+    console.log(number)
+    if(name == ''){
+        alert('Please enter your name')
+    }
+    if(number.length<16)
+        {
+            alert("Please Enter Valid Card Number")
+        }else if(month == ""){
+            alert('Pleade enter month')
+        }
+        else if(year == ""){
+            alert('Pleade enter year')
+        }
+       
+            else if(cvv.length < 3)
+            {
+                alert(" Please enter Valid cvv")
+            }
+            else{
+                alert("Payment successfull")
+                window.location.href="cart.html"
+            }
+
+}
+</script>
+</html>

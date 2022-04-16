@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #check{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        width: 70%;
+        border: 1px solid black;
+        
+    }
+    #container{
+        display: flex;
+        justify-content: space-around;
+    }
+   
+</style>
+<body>
+    <div id="container">
+
+        <div id="check">
+        
+        </div>
+
+
+    <div id="parent">
+        <div id="child">  <p></p>
+          <p id="price"></p>
+          </div>
+        <div id="child2">
+            <h3>Coopan code</h3>
+            <input type="text" placeholder="Enter your coopen code" id="code"><br><br>
+            <button > <a href="checkoput.html">Checkout</a> </button>
+        </div>
+      </div>
+    
+</div>
+</body>
+
+<script>
+     var cartData = JSON.parse(localStorage.getItem('cartData'));
+
+     var totalSum = cartData.reduce(function(sum,ele,index,arr){
+    return sum+ Number(ele.price);
+    }, 0);
+    var totalItems = cartData.length;
+    document.querySelector('p').innerText = 'You have ' + " " + totalItems + " " + "items" + " "+ "in your cart "  
+   document.querySelector('#price').innerText = "Price is:"+" "+ totalSum
+    
+   
+   cartData.forEach((cartItem,index) => {
+         var box= document.createElement('div');
+         box.setAttribute('class','box');
+
+         var name = document.createElement('h3');
+         name.innerText = cartItem.name;
+
+         var img = document.createElement('img');
+         img.src = cartItem.image_url;
+
+
+         var rating = document.createElement('p');
+        rating.innerText = cartItem.rating;
+
+         var price = document.createElement('p');
+        price.innerText = cartItem.price;
+
+        var button = document.createElement('button');
+        button.innerText = 'Remove item';
+        button.addEventListener('click',function(){
+            cartData.splice(index,1);
+            localStorage.setItem('cartData',JSON.stringify(cartData));
+            window.location.reload()
+        })
+
+        box.append(name,img,rating,price,button);
+        document.querySelector('#check').append(box);
+    });
+
+   
+</script>
+</html>
